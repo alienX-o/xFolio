@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind's tokens are mapped onto the runtime custom properties that
+ * ThemeStyles writes from config. `inline` matters here: it makes the
+ * utilities emit `var(--x-primary)` rather than baking a literal color into
+ * the stylesheet, so `bg-surface` follows the config live and the whole site
+ * restyles from the admin center with no rebuild.
+ */
+@theme inline {
+  --color-bg: var(--x-bg);
+  --color-surface: var(--x-surface);
+  --color-surface2: var(--x-surface-2);
+  --color-fg: var(--x-fg);
+  --color-muted: var(--x-muted);
+  --color-line: var(--x-line);
+  --color-primary: var(--x-primary);
+  --color-secondary: var(--x-secondary);
+  --color-accent: var(--x-accent);
+
+  --font-heading: var(--x-font-heading);
+  --font-body: var(--x-font-body);
+  --font-mono: var(--x-font-mono);
+
+  --radius-token: var(--x-radius);
+  --radius-token-sm: var(--x-radius-sm);
+  --radius-token-lg: var(--x-radius-lg);
+
+  --spacing-section: var(--x-section-y);
+  --spacing-gap: var(--x-gap);
+}
+
+/*
+ * Fallbacks. ThemeStyles overrides these on :root at runtime; these values
+ * only apply for the instant before it mounts.
+ */
+:root {
+  --x-bg: #0a0a0a;
+  --x-surface: #0f0f0f;
+  --x-surface-2: #161616;
+  --x-fg: #ededed;
+  --x-muted: #8a8a8a;
+  --x-line: #232323;
+  --x-primary: #e5e5e5;
+  --x-secondary: #a1a1a1;
+  --x-accent: #5b8cff;
+
+  --x-font-heading: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --x-font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --x-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --x-radius: 6px;
+  --x-radius-sm: 3px;
+  --x-radius-lg: 10px;
+
+  --x-density: 1;
+  --x-section-y: 7rem;
+  --x-gap: 1.5rem;
+
+  --x-grain: 0;
+  --x-glow: 0;
+  --x-angle: 90deg;
+  --x-gradient: linear-gradient(90deg, #e5e5e5, #a1a1a1);
+  --x-gradient-soft: linear-gradient(90deg, #e5e5e51a, #a1a1a11a);
+  --x-ring: #5b8cff66;
+  --x-glow-shadow: none;
+
+  --x-progress: 0;
+}
+
+@layer base {
+  * {
+    border-color: var(--x-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--x-bg);
+    color: var(--x-fg);
+    font-family: var(--x-font-body);
+    /* Slightly looser than default: long-form text at small sizes needs it. */
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /*
+   * Type scale. Minimal design lives or dies on typography, so headings get
+   * tight tracking and a hard weight ceiling — no 800s, no gradient fills.
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--x-font-heading);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.021em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--x-fg);
+    color: var(--x-bg);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--x-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Thin, neutral scrollbar. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--x-line) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--x-line);
+    border: 2px solid var(--x-bg);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--x-muted);
+  }
+}
+
+/* --------------------------------------------------------------- utilities */
+
+/**
+ * The small uppercase label that precedes section headings. This is the main
+ * structural device in the design now — it replaces the gradient headline
+ * treatment and carries hierarchy without any colour.
+ */
+@utility eyebrow {
+  font-family: var(--x-font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--x-muted);
+}
+
+@utility surface-card {
+  background-color: var(--x-surface);
+  border: 1px solid var(--x-line);
+  border-radius: var(--x-radius);
+}
+
+/** Flat by default: bordered, no shadow, no fill. */
+@utility plain-card {
+  border: 1px solid var(--x-line);
+  border-radius: var(--x-radius);
+  background-color: transparent;
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--x-bg) 78%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--x-line);
+}
+
+/**
+ * Kept because the config can still ask for it (the louder presets use a
+ * gradient), but nothing in the default design applies it.
+ */
+@utility text-gradient {
+  background-image: var(--x-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-block: 0.08em;
+  margin-block: -0.08em;
+}
+
+@utility hairline {
+  background-color: var(--x-line);
+}
+
+/** Underline that grows on hover — the only link flourish in the design. */
+@utility link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ----------------------------------------------------------------- effects */
+
+/*
+ * Film grain, off by default (theme.grain is 0 in every minimal preset) but
+ * still driven by config so the louder themes can switch it on.
+ */
+.grain-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--x-grain);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.55'/></svg>");
+}
+
+@keyframes x-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes x-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-blink {
+  animation: x-blink 1.1s step-end infinite;
+}
+
+.animate-marquee {
+  animation: x-marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+/*
+ * Reveal-on-scroll. Deliberately small and quick: an 8px rise over 500ms
+ * reads as considered, where the 20px/700ms version read as a slideshow.
+ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* One place to switch every animation off. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .grain-overlay::after {
+    display: none;
+  }
+}

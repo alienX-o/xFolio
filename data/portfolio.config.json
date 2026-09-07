@@ -1,0 +1,593 @@
+{
+  "version": 2,
+  "meta": {
+    "title": "Aryan Yadav",
+    "titleTemplate": "%s — Aryan Yadav",
+    "description": "Software engineer building scalable web and mobile applications with React, React Native and Node.js.",
+    "siteUrl": "",
+    "ogImage": "",
+    "keywords": [
+      "Aryan Yadav",
+      "software engineer",
+      "react developer",
+      "react native",
+      "full stack",
+      "portfolio"
+    ],
+    "locale": "en"
+  },
+  "identity": {
+    "name": "Aryan Yadav",
+    "shortName": "Aryan",
+    "initials": "AY",
+    "roles": [
+      "Software Engineer",
+      "Full-Stack Developer",
+      "React Specialist",
+      "Mobile App Developer"
+    ],
+    "tagline": "I build fast, scalable products for web and mobile.",
+    "bio": "Software engineer focused on elegant, high-performance applications. I work across the stack with React.js, React Native and Node.js, and I care about the details that make an interface feel fast.",
+    "location": "India",
+    "avatar": "",
+    "available": true,
+    "availabilityText": "Open to opportunities"
+  },
+  "theme": {
+    "preset": "neon",
+    "mode": "dark",
+    "tokens": {
+      "bg": "#04030a",
+      "surface": "#0c0a18",
+      "surface2": "#141024",
+      "fg": "#f5f0ff",
+      "muted": "#8b82ab",
+      "line": "#241d3d",
+      "primary": "#e935c1",
+      "secondary": "#00e5ff",
+      "accent": "#a78bfa"
+    },
+    "fonts": {
+      "heading": "Syne",
+      "body": "Outfit",
+      "mono": "JetBrains Mono"
+    },
+    "radius": 8,
+    "density": "spacious",
+    "grain": 0.09,
+    "glow": 0.85,
+    "gradientAngle": 120
+  },
+  "effects": {
+    "webgl": true,
+    "heroScene": "dots",
+    "intensity": 0.35,
+    "shaderText": false,
+    "cursor": "none",
+    "tilt": false,
+    "parallax": true,
+    "scrollProgress": true,
+    "revealAnimations": true,
+    "marquee": false
+  },
+  "nav": {
+    "style": "minimal",
+    "showLogo": true,
+    "logoText": "",
+    "showResume": true,
+    "blur": true
+  },
+  "footer": {
+    "note": "",
+    "credit": "",
+    "showSocials": true,
+    "showBackToTop": true
+  },
+  "links": {
+    "email": "aryanking05644@gmail.com",
+    "phone": "+917737099712",
+    "resume": "https://drive.google.com/file/d/1adE5v0Stgw9QriL6cuy_n3OIXIL04iif/view?usp=sharing",
+    "resumeLabel": "Resume",
+    "calendar": "",
+    "socials": [
+      {
+        "id": "github",
+        "platform": "github",
+        "label": "GitHub",
+        "url": "https://github.com/alienX-o",
+        "enabled": true
+      },
+      {
+        "id": "linkedin",
+        "platform": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/aryan-Yadav-b81271210/",
+        "enabled": true
+      },
+      {
+        "id": "email",
+        "platform": "email",
+        "label": "Email",
+        "url": "mailto:aryanking05644@gmail.com",
+        "enabled": true
+      },
+      {
+        "id": "phone",
+        "platform": "phone",
+        "label": "Phone",
+        "url": "tel:+917737099712",
+        "enabled": true
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "home",
+      "kind": "hero",
+      "label": "Home",
+      "enabled": true,
+      "title": "",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "about",
+      "kind": "about",
+      "label": "About",
+      "enabled": true,
+      "title": "About",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "experience",
+      "kind": "experience",
+      "label": "Experience",
+      "enabled": true,
+      "title": "Experience",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "skills",
+      "kind": "skills",
+      "label": "Skills",
+      "enabled": true,
+      "title": "Skills",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "projects",
+      "kind": "projects",
+      "label": "Projects",
+      "enabled": true,
+      "title": "Selected work",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "education",
+      "kind": "education",
+      "label": "Education",
+      "enabled": true,
+      "title": "Education",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    },
+    {
+      "id": "contact",
+      "kind": "contact",
+      "label": "Contact",
+      "enabled": true,
+      "title": "Contact",
+      "subtitle": "",
+      "body": "",
+      "layout": "prose",
+      "items": []
+    }
+  ],
+  "about": {
+    "body": "I am a software engineer working across web and mobile. Day to day that means React.js and React Native on the front, Node.js and MySQL behind them, and whatever glue the product needs in between. I like problems where performance and interface quality both matter.",
+    "highlights": [
+      "Shipped scalable web and mobile applications with React.js, React Native, Node.js and Azure",
+      "Comfortable owning a feature end to end, from API design through to interface polish",
+      "Built real-time systems with Socket.IO and WebRTC, including live bidding and video calling"
+    ],
+    "stats": [
+      {
+        "id": "stat-projects",
+        "label": "Projects built",
+        "value": "4"
+      },
+      {
+        "id": "stat-cgpa",
+        "label": "B.Tech CGPA",
+        "value": "8.0"
+      },
+      {
+        "id": "stat-grad",
+        "label": "Graduated",
+        "value": "2024"
+      }
+    ],
+    "image": ""
+  },
+  "experience": [
+    {
+      "id": "techcompiler-se",
+      "role": "Software Engineer",
+      "company": "TechCompiler Data Systems",
+      "location": "",
+      "period": "May 2025 — Present",
+      "current": true,
+      "summary": "Building scalable web and mobile products end to end.",
+      "bullets": [
+        "Developed scalable, high-performance web applications and mobile apps using React.js, React Native, Node.js, MySQL, REST APIs and Azure.",
+        "Collaborated on backend development, API integrations and real-time feature implementations."
+      ],
+      "tags": [
+        "React.js",
+        "React Native",
+        "Node.js",
+        "MySQL",
+        "REST APIs",
+        "Azure"
+      ],
+      "url": ""
+    },
+    {
+      "id": "techcompiler-intern",
+      "role": "Software Engineer Intern",
+      "company": "TechCompiler Data Systems",
+      "location": "",
+      "period": "Dec 2024 — Apr 2025",
+      "current": false,
+      "summary": "First professional exposure to a full development lifecycle.",
+      "bullets": [
+        "Contributed across the software development lifecycle and gained hands-on experience with industry tools and practices."
+      ],
+      "tags": [
+        "React.js",
+        "Node.js",
+        "REST APIs"
+      ],
+      "url": ""
+    },
+    {
+      "id": "igniters-hub",
+      "role": "Full-Stack Intern",
+      "company": "Igniter's Hub",
+      "location": "Noida",
+      "period": "Jun 2023 — Aug 2023",
+      "current": false,
+      "summary": "Spring Boot APIs with a React front end.",
+      "bullets": [
+        "Built and optimised RESTful APIs using Spring Boot while designing dynamic front-end interfaces in React.js.",
+        "Integrated robust authentication mechanisms and managed secure database operations with MySQL."
+      ],
+      "tags": [
+        "Spring Boot",
+        "React.js",
+        "RESTful APIs",
+        "MySQL",
+        "Authentication"
+      ],
+      "url": ""
+    }
+  ],
+  "skills": {
+    "display": "chips",
+    "showLevels": false,
+    "categories": [
+      {
+        "id": "languages",
+        "name": "Languages",
+        "emoji": ""
+      },
+      {
+        "id": "frontend",
+        "name": "Frontend",
+        "emoji": ""
+      },
+      {
+        "id": "backend",
+        "name": "Backend",
+        "emoji": ""
+      },
+      {
+        "id": "mobile",
+        "name": "Mobile",
+        "emoji": ""
+      },
+      {
+        "id": "database",
+        "name": "Database",
+        "emoji": ""
+      },
+      {
+        "id": "tools",
+        "name": "Tools",
+        "emoji": ""
+      }
+    ],
+    "items": [
+      {
+        "id": "javascript",
+        "name": "JavaScript",
+        "category": "languages",
+        "level": 90,
+        "icon": "javascript"
+      },
+      {
+        "id": "typescript",
+        "name": "TypeScript",
+        "category": "languages",
+        "level": 85,
+        "icon": "typescript"
+      },
+      {
+        "id": "java",
+        "name": "Java",
+        "category": "languages",
+        "level": 80,
+        "icon": "java"
+      },
+      {
+        "id": "python",
+        "name": "Python",
+        "category": "languages",
+        "level": 75,
+        "icon": "python"
+      },
+      {
+        "id": "react",
+        "name": "React.js",
+        "category": "frontend",
+        "level": 95,
+        "icon": "react"
+      },
+      {
+        "id": "html5",
+        "name": "HTML5",
+        "category": "frontend",
+        "level": 90,
+        "icon": "html5"
+      },
+      {
+        "id": "css3",
+        "name": "CSS3",
+        "category": "frontend",
+        "level": 90,
+        "icon": "css3"
+      },
+      {
+        "id": "tailwind",
+        "name": "Tailwind CSS",
+        "category": "frontend",
+        "level": 85,
+        "icon": "tailwind"
+      },
+      {
+        "id": "materialui",
+        "name": "Material UI",
+        "category": "frontend",
+        "level": 85,
+        "icon": "materialui"
+      },
+      {
+        "id": "nextjs",
+        "name": "Next.js",
+        "category": "frontend",
+        "level": 80,
+        "icon": "nextjs"
+      },
+      {
+        "id": "nodejs",
+        "name": "Node.js",
+        "category": "backend",
+        "level": 85,
+        "icon": "nodejs"
+      },
+      {
+        "id": "express",
+        "name": "Express.js",
+        "category": "backend",
+        "level": 85,
+        "icon": "express"
+      },
+      {
+        "id": "springboot",
+        "name": "Spring Boot",
+        "category": "backend",
+        "level": 80,
+        "icon": "springboot"
+      },
+      {
+        "id": "reactnative",
+        "name": "React Native",
+        "category": "mobile",
+        "level": 90,
+        "icon": "reactnative"
+      },
+      {
+        "id": "mysql",
+        "name": "MySQL",
+        "category": "database",
+        "level": 85,
+        "icon": "mysql"
+      },
+      {
+        "id": "mongodb",
+        "name": "MongoDB",
+        "category": "database",
+        "level": 80,
+        "icon": "mongodb"
+      },
+      {
+        "id": "git",
+        "name": "Git",
+        "category": "tools",
+        "level": 90,
+        "icon": "git"
+      },
+      {
+        "id": "vscode",
+        "name": "VS Code",
+        "category": "tools",
+        "level": 95,
+        "icon": "vscode"
+      },
+      {
+        "id": "postman",
+        "name": "Postman",
+        "category": "tools",
+        "level": 90,
+        "icon": "postman"
+      },
+      {
+        "id": "azure",
+        "name": "Azure",
+        "category": "tools",
+        "level": 75,
+        "icon": "azure"
+      }
+    ]
+  },
+  "projects": {
+    "layout": "list",
+    "projects": [
+      {
+        "id": "online-auction",
+        "title": "Online Auction Platform",
+        "blurb": "Live bidding with automatic bid handling and instant updates.",
+        "description": "A real-time bidding platform running live auctions with automatic bid handling. Socket.IO pushes instantaneous updates to every connected bidder, and the platform layers in JWT-based authentication with multi-factor verification to keep accounts and bids secure.",
+        "year": "2024",
+        "role": "Full-stack",
+        "tags": [
+          "Node.js",
+          "React.js",
+          "MySQL",
+          "Socket.IO",
+          "WebSockets",
+          "JWT"
+        ],
+        "image": "",
+        "featured": true,
+        "links": {
+          "demo": "",
+          "code": "",
+          "more": ""
+        }
+      },
+      {
+        "id": "task-manager",
+        "title": "Task Management Mobile App",
+        "blurb": "Push notifications, real-time sync and full offline support.",
+        "description": "A cross-platform task manager with push notifications, real-time sync and offline support. It includes a dashboard for task analytics and performance tracking, and pulls in calendar and notification functionality through third-party APIs. Authentication is JWT-based with multi-factor verification.",
+        "year": "2025",
+        "role": "Mobile + API",
+        "tags": [
+          "React Native",
+          "REST APIs",
+          "Azure SQL",
+          "Node.js",
+          "JWT"
+        ],
+        "image": "",
+        "featured": true,
+        "links": {
+          "demo": "",
+          "code": "",
+          "more": ""
+        }
+      },
+      {
+        "id": "currency-converter",
+        "title": "Real-Time Currency Converter",
+        "blurb": "Live exchange rates with caching and a full test suite.",
+        "description": "A responsive converter built on a live exchange-rate API. Caching strategies cut API latency, and unit plus integration tests cover the conversion and rate-refresh paths. The interface is server-rendered with Thymeleaf for consistent behaviour across devices.",
+        "year": "2023",
+        "role": "Backend",
+        "tags": [
+          "Spring Boot",
+          "Thymeleaf",
+          "Hibernate",
+          "MySQL",
+          "REST APIs"
+        ],
+        "image": "",
+        "featured": false,
+        "links": {
+          "demo": "",
+          "code": "",
+          "more": ""
+        }
+      },
+      {
+        "id": "sign-language-call",
+        "title": "Sign Language Video Call",
+        "blurb": "Real-time gesture-to-text translation inside a video call.",
+        "description": "A real-time sign language translation system for video calls. A deep-learning model detects hand gestures and converts them to text live, while WebRTC handles low-latency video between participants. Server-side inference was tuned to keep translation within the call's real-time budget.",
+        "year": "2024",
+        "role": "ML + full-stack",
+        "tags": [
+          "Python",
+          "TensorFlow",
+          "Next.js",
+          "WebRTC"
+        ],
+        "image": "",
+        "featured": false,
+        "links": {
+          "demo": "",
+          "code": "",
+          "more": ""
+        }
+      }
+    ]
+  },
+  "education": {
+    "degrees": [
+      {
+        "id": "btech",
+        "degree": "B.Tech, Computer Science & Engineering",
+        "institution": "Govt. Engineering College, Ajmer",
+        "period": "2020 — 2024",
+        "grade": "CGPA 8.0",
+        "detail": ""
+      }
+    ],
+    "certifications": [
+      {
+        "id": "java-internship",
+        "name": "Java Development Internship",
+        "issuer": "Igniter's Hub",
+        "year": "2023",
+        "url": ""
+      }
+    ],
+    "achievements": [
+      "The only person in the district to qualify for the Regional Mathematics Olympiad (RMO)"
+    ]
+  },
+  "contact": {
+    "body": "Interested in discussing a project or a role? I am always open to new challenges and collaborations.",
+    "ctaLabel": "Send an email",
+    "ctaHref": "mailto:aryanking05644@gmail.com",
+    "secondaryLabel": "View resume",
+    "secondaryHref": "https://drive.google.com/file/d/1adE5v0Stgw9QriL6cuy_n3OIXIL04iif/view?usp=sharing"
+  }
+}

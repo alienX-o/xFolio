@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# xFolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A portfolio that is entirely defined by one JSON file, with an admin center at
+`/admin` for editing it — content, layout, theme and 3D effects — and no
+backend in production.
 
-## Available Scripts
+Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · three.js
 
-In the project directory, you can run:
+```bash
+npm install
+npm run dev      # http://127.0.0.1:3000
+```
 
-### `npm start`
+| Script              | What it does                                  |
+| ------------------- | --------------------------------------------- |
+| `npm run dev`       | Dev server, bound to localhost                |
+| `npm run build`     | Production build                              |
+| `npm start`         | Serve the production build                    |
+| `npm run typecheck` | `tsc --noEmit`                                |
+| `npm run lint`      | ESLint                                        |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How it works
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`data/portfolio.config.json` **is** the site. It is imported statically, so
+there is no I/O or fetching at request time and the whole thing can deploy as
+static output.
 
-### `npm test`
+```
+data/portfolio.config.json
+  → normalizeConfig()            allowlist validation + version migration
+  → <SiteConfigProvider>         puts it in context, writes theme CSS vars
+  → <Sections>                   renders config.sections in order
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Two consequences worth knowing:
 
-### `npm run build`
+- **`config.sections` is the page.** Reorder that array and the site reorders,
+  nav included. `enabled: false` removes a section from both.
+- **The theme is CSS custom properties.** Tailwind's tokens are mapped onto
+  them with `@theme inline`, so `bg-surface` and `text-primary` resolve to
+  whatever the config currently says. Restyling needs no rebuild.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Editing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open `/admin`. Tabs down the left cover identity, theme, effects, layout,
+each content section, metadata, and a raw JSON editor. The right pane is a live
+preview — a real iframe of `/?draft=1`, updated over postMessage as you type,
+so it is the actual site rather than an approximation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Edits go to a **draft in `localStorage`**, autosaved. Nothing reaches visitors
+until you publish. Undo/redo is `Ctrl+Z` / `Ctrl+Shift+Z`; `Ctrl+S` publishes.
 
-### `npm run eject`
+### Publishing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**In development** — press **Save to file**. A dev-only route rewrites
+`data/portfolio.config.json`, so your edits show up in `git diff`. Commit it.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**In production** — press **Export JSON**, drop the file at
+`data/portfolio.config.json`, commit, redeploy. The save route returns 404 in a
+production build, which is what keeps the deployed site backend-free.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`Revert` discards the draft and returns to the committed file. `Reset to
+template` empties everything back to the blank starting config.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deploying
 
-## Learn More
+Works as-is on Vercel, Netlify, Cloudflare or any Node host — no environment
+variables, no database.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For a fully static export (GitHub Pages, S3), add `output: "export"` to
+`next.config.mjs` and delete `src/app/api/` — it is development-only, and route
+handlers are not supported in static export.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## On storage, and SQLite
 
-### Code Splitting
+Drafts live in `localStorage` and the published config lives in git. That is a
+deliberate trade rather than a limitation to work around:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- SQLite is a filesystem database. On serverless hosts the filesystem is
+  read-only and ephemeral, so writes disappear between requests. It only works
+  with a persistent volume — which is a backend, and then `/admin` needs real
+  authentication.
+- SQLite compiled to WASM does run in the browser, but it is still per-browser
+  storage. Visitors would not see your edits — the same guarantee
+  `localStorage` already gives, plus a megabyte of WASM.
+- Committed JSON is versioned, diffable, reviewable and deployable anywhere.
 
-### Analyzing the Bundle Size
+If you later want drafts to follow you across devices, everything storage
+touches sits behind the `DraftStore` interface in `src/lib/storage.ts`.
+Implement it against a hosted database — **libSQL/Turso** is the natural fit,
+since it speaks SQLite over HTTP and needs no server of your own — and swap the
+export. Nothing else in the app reads storage directly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Security notes
 
-### Making a Progressive Web App
+- **Every config URL is sanitised at render time** (`src/lib/url.ts`) against a
+  scheme allowlist (http, https, mailto, tel, relative). A `javascript:` URL is
+  dropped and its link simply does not render. The admin warns you while typing.
+- **All config is rebuilt field by field** by `normalizeConfig`, which drops
+  unknown keys, clamps numbers and length-caps strings. Colours and font names
+  are additionally validated against character allowlists because they are
+  interpolated into a stylesheet.
+- **No `dangerouslySetInnerHTML` for content.** Config prose supports
+  `**bold**`, `*italic*`, `` `code` `` and `[text](url)`, rendered as React
+  elements (`src/lib/text.tsx`), so there is no HTML injection surface.
+- **The dev save route** is fenced by: development-only, localhost binding,
+  same-origin `Origin` check, JSON content type, a 1 MB body cap, schema
+  normalisation before writing, and one hard-coded destination path.
+- **`/admin` is unauthenticated on purpose.** In production it only reads and
+  writes the visitor's own `localStorage`; there is no shared state and no
+  server write path, so a stranger opening it can only edit a private copy.
+  **Add real authn/authz the moment a backend appears here.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Accessibility and performance
 
-### Advanced Configuration
+- `prefers-reduced-motion` disables every animation and skips WebGL entirely.
+- three.js is a lazy chunk, only fetched when config allows it, the browser
+  supports it, and motion is not reduced. The render loop stops when the canvas
+  scrolls out of view or the tab is hidden; DPR is clamped.
+- Pointer tracking, scroll progress and card tilt write to refs and CSS
+  variables inside animation frames, so none of them cause React renders.
+- The hero `<h1>` stays in the document even when the WebGL title is drawn over
+  it, so semantics and SEO are unaffected. The 3D canvas is `aria-hidden`, and
+  the skill cloud exposes an equivalent list to assistive tech.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Layout
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+data/portfolio.config.json     the entire site
+src/config/                    schema, defaults, theme presets, normalisation
+src/lib/                       theme vars, URL allowlist, store, hooks, icons
+src/components/sections/       hero, about, experience, skills, projects, …
+src/components/three/          scenes, canvas-texture shader text, skill cloud
+src/components/admin/          the editor, its fields and the live preview
+src/app/api/admin/save/        dev-only config writer
+```
